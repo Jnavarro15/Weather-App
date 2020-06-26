@@ -1,6 +1,9 @@
 import React from 'react';
-import WeekContainer from './components/WeekContainer';
 import Search from './components/Search';
+import Error from './components/Error';
+import WeekContainer from './components/WeekContainer';
+import history from './history'
+import { Router, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,10 +26,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <Search updateWeather={this.updateWeather} />
-        <WeekContainer />
-      </div>
+      <main className='App'>
+        <Router history={history}>
+          <Switch>
+            <Route path='/' render={props => <Search updateWeather={this.updateWeather} />} exact />
+            <Route path='/forecast' render={props => <WeekContainer dailyData={this.state.dailyData} />} />
+            <Route component={Error} />
+          </Switch>
+        </Router>
+      </main>
+
     );
   }
 }

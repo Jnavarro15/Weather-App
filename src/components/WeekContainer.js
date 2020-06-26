@@ -1,11 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import DailyCard from './DailyCard'
 
-export class WeekContainer extends Component {
-  state = {
-    fullData: [],
-    dailyData: []
-  }
+const WeekContainer = (props) => {
 
   // componentDidMount = () => {
   //   const weatherURL = `http://api.openweathermap.org/data/2.5/forecast?zip=60506,us&appid=${apiConfig.omwKey}`
@@ -21,16 +17,15 @@ export class WeekContainer extends Component {
   //     })
   // }
 
-  formatDailyCards = () => {
-    return this.state.dailyData.map((reading, index) => <DailyCard reading={reading} key={index} />)
+  const formatDailyCards = () => {
+    return props.dailyData.map((reading, index) => <DailyCard reading={reading} key={index} />)
   }
-  render() {
-    return (
-      <div className='week-container'>
-        {/* {this.formatDailyCards()} */}
-      </div>
-    )
-  }
+
+  return (
+    <div className='week-container'>
+      {formatDailyCards()}
+    </div>
+  )
 }
 
 export default WeekContainer

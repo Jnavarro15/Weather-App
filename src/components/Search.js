@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { GoSearch } from "react-icons/go"
 import apiConfig from '../apiKeys'
+import history from '../history';
 
 export default class Search extends Component {
   constructor(props) {
@@ -43,12 +44,13 @@ export default class Search extends Component {
       .then(data => {
         const dailyData = data.list.filter(reading => reading.dt_txt.includes("18:00:00"))
         this.props.updateWeather(dailyData)
+        history.push('/forecast')
       })
       .catch(error => {
         this.setState({
           error: 'yes_error'
         })
-        console.log(error + ' enter a valid US zipcode')
+        console.log(error)
       })
   }
 
