@@ -1,40 +1,46 @@
 import React from 'react';
 import Search from './components/Search';
-import Error from './components/Error';
 import WeekContainer from './components/WeekContainer';
-import history from './history'
-import { Router, Route, Switch } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      dailyData: []
+      dailyData: [],
+      data: [],
+      isLoaded: false
     }
 
     this.updateWeather = this.updateWeather.bind(this)
+    this.updateZip = this.updateZip.bind(this)
+
   }
 
-  updateWeather(data) {
-    console.log(data)
-
+  updateZip(newZip) {
     this.setState({
-      dailyData: data
+      isLoaded: !this.state.isLoaded
     })
   }
 
+  updateWeather(data, dailyData) {
+    console.log(dailyData)
+
+    this.setState({
+      dailyData: dailyData,
+      data: data,
+      isLoaded: true
+    })
+  }
+
+
   render() {
+    const isLoaded = this.state.isLoaded
     return (
-      <main className='App'>
-        <Router history={history}>
-          <Switch>
-            <Route path='/' render={props => <Search updateWeather={this.updateWeather} />} exact />
-            <Route path='/forecast' render={props => <WeekContainer dailyData={this.state.dailyData} />} />
-            <Route component={Error} />
-          </Switch>
-        </Router>
-      </main>
+      <div className='App'>
+        <Search updateZip={this.updateZip} updateWeather={this.updateWeather} />
+        {isLoaded ? <WeekContainer dailyData={this.state.dailyData} /> : null}
+      </div>
 
     );
   }

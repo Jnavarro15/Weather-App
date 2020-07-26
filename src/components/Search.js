@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { GoSearch } from "react-icons/go"
 import apiConfig from '../apiKeys'
-import history from '../history';
 
 export default class Search extends Component {
   constructor(props) {
@@ -19,7 +18,7 @@ export default class Search extends Component {
 
   startSearch(e) {
     console.log("Search! " + this.cityInput.current.value)
-
+    this.props.updateZip(this.cityInput.current.value)
     if (this.cityInput.current.value !== "") {
       this.fetchData();
 
@@ -33,7 +32,7 @@ export default class Search extends Component {
   fetchData() {
     let cityZip = this.cityInput.current.value
 
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?zip=${cityZip},us&appid=${apiConfig.omwKey}`)
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?zip=${cityZip},us&appid=${apiConfig.omwKey}&units=imperial`)
       .then(response => {
         if (!response.ok) {
           throw Error(response.statusText)
@@ -43,8 +42,7 @@ export default class Search extends Component {
       .then(response => response.json())
       .then(data => {
         const dailyData = data.list.filter(reading => reading.dt_txt.includes("18:00:00"))
-        this.props.updateWeather(dailyData)
-        history.push('/forecast')
+        this.props.updateWeather(data, dailyData)
       })
       .catch(error => {
         this.setState({
@@ -52,6 +50,7 @@ export default class Search extends Component {
         })
         console.log(error)
       })
+
   }
 
 

@@ -29,3 +29,7 @@ code {
 .img-icon {
   font-size: 40px;
 }
+
+.form-toggle {
+  display: inline-block;
+}
