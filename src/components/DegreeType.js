@@ -2,7 +2,7 @@ import React from 'react'
 
 function DegreeType({ degreeType, updateDegree }) {
   return (
-    <React.Fragment>
+    <div className="degree-type">
       <div className="form-toggle">
         <input
           className="form-toggle-input"
@@ -27,7 +27,7 @@ function DegreeType({ degreeType, updateDegree }) {
         />
         <label className="form-toggle-label" for="fahrenheit">Fahrenheit</label>
       </div>
-    </React.Fragment>
+    </div >
   )
 }
 

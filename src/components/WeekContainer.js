@@ -23,8 +23,12 @@ class WeekContainer extends React.Component {
 
       return (
         <div className='week-container'>
-          <DegreeType updateDegree={updateDegree} degreeType={this.state.degreeType} />
-          {formatDailyCards()}
+          <div className="degree-toggle">
+            <DegreeType updateDegree={updateDegree} degreeType={this.state.degreeType} />  
+          </div>
+          <div className='cards-container'>
+            {formatDailyCards()}
+          </div>
         </div>
       )
 

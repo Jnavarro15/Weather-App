@@ -13,12 +13,18 @@ code {
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+
 }
 
 .week-container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .card {
@@ -30,6 +36,12 @@ code {
   font-size: 40px;
 }
 
-.form-toggle {
-  display: inline-block;
+.degree-type {
+  display: flex;
+  justify-content: center;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
 }
